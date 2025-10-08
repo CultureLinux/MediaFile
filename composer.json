@@ -1,5 +1,5 @@
 {
-  "name": "culturelinux/media-file",
+  "name": "culturelinux/mediafile",
   "description": "A unified reader of metadata from audio & video files",
   "license": "MIT",
   "keywords": [
