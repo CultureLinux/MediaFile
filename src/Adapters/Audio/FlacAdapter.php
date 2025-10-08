@@ -75,10 +75,19 @@ class FlacAdapter implements AudioAdapter
     }
 
     /**
-     * @return array|null
+     * @return string|null
      */
-    public function getVorbisComment()
+    public function getAlbum()
     {
-        return $this->flac->vorbisComment;
+        return $this->flac->vorbisComment["comments"]["album"][0];
+    }
+
+
+    /**
+     * @return string|null
+     */
+    public function getArtist()
+    {
+        return $this->flac->vorbisComment["comments"]["performer"][0];
     }
 }

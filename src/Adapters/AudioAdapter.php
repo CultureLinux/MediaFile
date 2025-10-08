@@ -1,4 +1,5 @@
 <?php
+
 namespace wapmorgan\MediaFile\Adapters;
 
 /**
@@ -10,7 +11,8 @@ namespace wapmorgan\MediaFile\Adapters;
  * - is vbr
  * - is lossless
  */
-interface AudioAdapter {
+interface AudioAdapter
+{
 
     /**
      * @return int
@@ -41,4 +43,15 @@ interface AudioAdapter {
      * @return boolean
      */
     public function isLossless();
+
+
+    /**
+     * @return string
+     */
+    public function getAlbum();
+
+    /**
+     * @return string
+     */
+    public function getArtist();
 }
