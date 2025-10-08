@@ -80,7 +80,10 @@ class Mp3Adapter implements AudioAdapter
      */
     public function getAlbum()
     {
-        return $this->mp3;
+        return $this->mp3->tags['album']
+            ?? $this->mp3->tags1['album']
+            ?? $this->mp3->tags2['album']
+            ?? null;
     }
 
 
@@ -89,6 +92,9 @@ class Mp3Adapter implements AudioAdapter
      */
     public function getArtist()
     {
-        return $this->mp3;
+        return $this->mp3->tags['artist']
+            ?? $this->mp3->tags1['artist']
+            ?? $this->mp3->tags2['artist']
+            ?? null;
     }
 }
