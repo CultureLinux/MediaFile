@@ -1,11 +1,13 @@
 <?php
+
 namespace wapmorgan\MediaFile\Adapters\Audio;
 
 use wapmorgan\MediaFile\Adapters\AudioAdapter;
 use wapmorgan\Mp3Info\Mp3Info;
 use wapmorgan\MediaFile\Exceptions\FileAccessException;
 
-class Mp3Adapter implements AudioAdapter {
+class Mp3Adapter implements AudioAdapter
+{
     protected $filename;
     protected $mp3;
 
@@ -17,8 +19,9 @@ class Mp3Adapter implements AudioAdapter {
      * @throws \wapmorgan\MediaFile\Exceptions\FileAccessException
      * @throws \Exception
      */
-    public function __construct($filename) {
-        if (!file_exists($filename) || !is_readable($filename)) throw new FileAccessException('File "'.$filename.'" is not available for reading!');
+    public function __construct($filename)
+    {
+        if (!file_exists($filename) || !is_readable($filename)) throw new FileAccessException('File "' . $filename . '" is not available for reading!');
         $this->filename = $filename;
         $this->mp3 = new Mp3Info($filename);
     }
@@ -26,42 +29,66 @@ class Mp3Adapter implements AudioAdapter {
     /**
      * @return float|int
      */
-    public function getLength() {
+    public function getLength()
+    {
         return $this->mp3->duration;
     }
 
     /**
      * @return int
      */
-    public function getBitRate() {
+    public function getBitRate()
+    {
         return $this->mp3->bitRate;
     }
 
     /**
      * @return int
      */
-    public function getSampleRate() {
+    public function getSampleRate()
+    {
         return $this->mp3->sampleRate;
     }
 
     /**
      * @return int
      */
-    public function getChannels() {
+    public function getChannels()
+    {
         return $this->mp3->channel == 'mono' ? 1 : 2;
     }
 
     /**
      * @return bool
      */
-    public function isVariableBitRate() {
+    public function isVariableBitRate()
+    {
         return $this->mp3->isVbr;
     }
 
     /**
      * @return bool
      */
-    public function isLossless() {
+    public function isLossless()
+    {
         return false;
+    }
+
+
+    /**
+     * @return string|null
+     */
+    public function getAlbum()
+    {
+        return $this->mp3;
+    }
+
+
+    /**
+     * @return string|null
+     */
+    public function getArtist()
+    {
+        return $this->mp3;
     }
 }
