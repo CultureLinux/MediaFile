@@ -1,11 +1,13 @@
 <?php
+
 namespace wapmorgan\MediaFile\Adapters\Audio;
 
 use Flac;
 use wapmorgan\MediaFile\Adapters\AudioAdapter;
 use wapmorgan\MediaFile\Exceptions\FileAccessException;
 
-class FlacAdapter implements AudioAdapter {
+class FlacAdapter implements AudioAdapter
+{
     protected $filename;
     protected $flac;
 
@@ -17,8 +19,9 @@ class FlacAdapter implements AudioAdapter {
      * @throws \ErrorException
      * @throws \wapmorgan\MediaFile\Exceptions\FileAccessException
      */
-    public function __construct($filename) {
-        if (!file_exists($filename) || !is_readable($filename)) throw new FileAccessException('File "'.$filename.'" is not available for reading!');
+    public function __construct($filename)
+    {
+        if (!file_exists($filename) || !is_readable($filename)) throw new FileAccessException('File "' . $filename . '" is not available for reading!');
         $this->filename = $filename;
         $this->flac = new Flac($filename);
     }
@@ -26,42 +29,56 @@ class FlacAdapter implements AudioAdapter {
     /**
      * @return int|null
      */
-    public function getLength() {
+    public function getLength()
+    {
         return $this->flac->streamDuration;
     }
 
     /**
      * @return float|int
      */
-    public function getBitRate() {
+    public function getBitRate()
+    {
         return floor($this->flac->streamBitsPerSample * $this->flac->streamTotalSamples / $this->flac->streamDuration);
     }
 
     /**
      * @return int|null
      */
-    public function getSampleRate() {
+    public function getSampleRate()
+    {
         return $this->flac->streamSampleRate;
     }
 
     /**
      * @return int|null
      */
-    public function getChannels() {
+    public function getChannels()
+    {
         return $this->flac->streamChannels;
     }
 
     /**
      * @return bool
      */
-    public function isVariableBitRate() {
+    public function isVariableBitRate()
+    {
         return true;
     }
 
     /**
      * @return bool
      */
-    public function isLossless() {
+    public function isLossless()
+    {
         return false;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getVorbisComment()
+    {
+        return $this->flac->vorbiscomments;
     }
 }
