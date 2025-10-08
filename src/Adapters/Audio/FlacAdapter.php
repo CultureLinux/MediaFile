@@ -79,6 +79,6 @@ class FlacAdapter implements AudioAdapter
      */
     public function getVorbisComment()
     {
-        return $this->flac->vorbiscomments;
+        return $this->flac->vorbisComment;
     }
 }
